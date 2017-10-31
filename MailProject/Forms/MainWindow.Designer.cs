@@ -31,7 +31,7 @@
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupNewDocuments = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
+            this.navBarControlMain = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGrInnerMail = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemInnerIncoming = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemInnerOutgoing = new DevExpress.XtraNavBar.NavBarItem();
@@ -42,17 +42,19 @@
             this.navBarInnerDocuments = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemServiceMail = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemOrders = new DevExpress.XtraNavBar.NavBarItem();
+            this.barButtonLogin = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
             // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.ribbonControl1.ExpandCollapseItem});
+            this.ribbonControl1.ExpandCollapseItem,
+            this.barButtonLogin});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 1;
+            this.ribbonControl1.MaxItemId = 6;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -68,17 +70,18 @@
             // 
             // ribbonPageGroupNewDocuments
             // 
+            this.ribbonPageGroupNewDocuments.ItemLinks.Add(this.barButtonLogin);
             this.ribbonPageGroupNewDocuments.Name = "ribbonPageGroupNewDocuments";
-            this.ribbonPageGroupNewDocuments.Text = "Документы";
+            this.ribbonPageGroupNewDocuments.Text = "etc";
             // 
-            // navBarControl1
+            // navBarControlMain
             // 
-            this.navBarControl1.ActiveGroup = this.navBarGrInnerMail;
-            this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
+            this.navBarControlMain.ActiveGroup = this.navBarGrInnerMail;
+            this.navBarControlMain.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navBarGrInnerMail,
             this.navBarGrOutterMail,
             this.navBarInnerDocuments});
-            this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
+            this.navBarControlMain.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItemInnerIncoming,
             this.navBarItemInnerOutgoing,
             this.navBarItemOuterIncomingMail,
@@ -86,12 +89,12 @@
             this.navBarItemTreatmentMail,
             this.navBarItemServiceMail,
             this.navBarItemOrders});
-            this.navBarControl1.Location = new System.Drawing.Point(0, 149);
-            this.navBarControl1.Name = "navBarControl1";
-            this.navBarControl1.OptionsNavPane.ExpandedWidth = 199;
-            this.navBarControl1.Size = new System.Drawing.Size(199, 372);
-            this.navBarControl1.TabIndex = 1;
-            this.navBarControl1.Text = "navBarControl1";
+            this.navBarControlMain.Location = new System.Drawing.Point(0, 149);
+            this.navBarControlMain.Name = "navBarControlMain";
+            this.navBarControlMain.OptionsNavPane.ExpandedWidth = 199;
+            this.navBarControlMain.Size = new System.Drawing.Size(199, 372);
+            this.navBarControlMain.TabIndex = 1;
+            this.navBarControlMain.Text = "navBarControl1";
             // 
             // navBarGrInnerMail
             // 
@@ -154,19 +157,26 @@
             this.navBarItemOrders.Caption = "Приказы";
             this.navBarItemOrders.Name = "navBarItemOrders";
             // 
+            // barButtonLogin
+            // 
+            this.barButtonLogin.Caption = "Войти в систему";
+            this.barButtonLogin.Id = 5;
+            this.barButtonLogin.Name = "barButtonLogin";
+            this.barButtonLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonLogin_ItemClick);
+            // 
             // MainWindow
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 533);
-            this.Controls.Add(this.navBarControl1);
+            this.Controls.Add(this.navBarControlMain);
             this.Controls.Add(this.ribbonControl1);
             this.Name = "MainWindow";
             this.Ribbon = this.ribbonControl1;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,7 +187,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupNewDocuments;
-        private DevExpress.XtraNavBar.NavBarControl navBarControl1;
+        private DevExpress.XtraNavBar.NavBarControl navBarControlMain;
         private DevExpress.XtraNavBar.NavBarGroup navBarGrInnerMail;
         private DevExpress.XtraNavBar.NavBarItem navBarItemInnerIncoming;
         private DevExpress.XtraNavBar.NavBarItem navBarItemInnerOutgoing;
@@ -188,6 +198,7 @@
         private DevExpress.XtraNavBar.NavBarGroup navBarInnerDocuments;
         private DevExpress.XtraNavBar.NavBarItem navBarItemServiceMail;
         private DevExpress.XtraNavBar.NavBarItem navBarItemOrders;
+        private DevExpress.XtraBars.BarButtonItem barButtonLogin;
     }
 }
 

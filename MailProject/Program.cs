@@ -20,7 +20,9 @@ namespace MailProject
 
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
-            Application.Run(new Forms.AuthorizationWindow());
+            Application.Run(new MainWindow());
         }
     }
+
+  
 }

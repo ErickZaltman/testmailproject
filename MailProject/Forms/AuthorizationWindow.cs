@@ -6,16 +6,19 @@ namespace MailProject.Forms
 {
     public partial class AuthorizationWindow : Form
     {
+        MainWindow mainForm;
         public AuthorizationWindow()
         {
             InitializeComponent();
+            mainForm = Owner as MainWindow;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (AuthenticationCheck(tbLogin.Text,tbPassword.Text)) {
-                MainWindow newWindow = new MainWindow();
-                newWindow.Show();
+                mainForm.userName = tbLogin.Text;
+                DialogResult = DialogResult.OK;
+                Close();
             }
             else
             {
@@ -29,7 +32,6 @@ namespace MailProject.Forms
             PrincipalContext pcon = new PrincipalContext(ContextType.Domain);
             if (pcon.ValidateCredentials(login, password, ContextOptions.Negotiate))
             {
-                MessageBox.Show(":");
                 return true;
             }
             return false;

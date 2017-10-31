@@ -21,8 +21,12 @@ namespace MailProject
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             Application.Run(new MainWindow());
-        }
-    }
 
-  
+               
+        }
+        
+    }
+    public delegate void delegateFunc(string data);
+
+
 }

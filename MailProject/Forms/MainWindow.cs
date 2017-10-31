@@ -24,8 +24,8 @@ namespace MailProject
         public MainWindow()
         {
             InitializeComponent();
-            
 
+            currentUser = new Person();
             navBarControlMain.Visible = false;
 
         }
@@ -40,16 +40,20 @@ namespace MailProject
             Authorize();
         }
 
-       
+        void dataFunc(string data)
+        {
+            currentUser.LoginName = data;
+        }
         private void Authorize()
         {
            
-            Forms.AuthorizationWindow newAuthForm = new Forms.AuthorizationWindow();
-            newAuthForm.Owner = this;
+            Forms.AuthorizationWindow newAuthForm = new Forms.AuthorizationWindow(dataFunc);
+            
             newAuthForm.ShowDialog();
             if (newAuthForm.DialogResult == DialogResult.OK)
             {
                 MessageBox.Show("sdfsd");
+                MessageBox.Show(currentUser.LoginName);
             }
         }
 

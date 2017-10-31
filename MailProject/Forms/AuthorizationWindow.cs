@@ -6,17 +6,21 @@ namespace MailProject.Forms
 {
     public partial class AuthorizationWindow : Form
     {
-        MainWindow mainForm;
+        private delegateFunc d;
         public AuthorizationWindow()
         {
             InitializeComponent();
-            mainForm = Owner as MainWindow;
+        }
+        public AuthorizationWindow(delegateFunc sender)
+        {
+            InitializeComponent();
+            d = sender;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (AuthenticationCheck(tbLogin.Text,tbPassword.Text)) {
-                mainForm.userName = tbLogin.Text;
+                d(tbLogin.Text);
                 DialogResult = DialogResult.OK;
                 Close();
             }

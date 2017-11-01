@@ -43,6 +43,7 @@
             this.navBarInnerDocuments = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemServiceMail = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemOrders = new DevExpress.XtraNavBar.NavBarItem();
+            this.tbLogInfo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).BeginInit();
             this.SuspendLayout();
@@ -99,7 +100,7 @@
             this.navBarControlMain.Location = new System.Drawing.Point(0, 149);
             this.navBarControlMain.Name = "navBarControlMain";
             this.navBarControlMain.OptionsNavPane.ExpandedWidth = 199;
-            this.navBarControlMain.Size = new System.Drawing.Size(199, 372);
+            this.navBarControlMain.Size = new System.Drawing.Size(199, 263);
             this.navBarControlMain.TabIndex = 1;
             this.navBarControlMain.Text = "navBarControl1";
             // 
@@ -167,12 +168,21 @@
             this.navBarItemOrders.Caption = "Приказы";
             this.navBarItemOrders.Name = "navBarItemOrders";
             // 
+            // tbLogInfo
+            // 
+            this.tbLogInfo.Location = new System.Drawing.Point(0, 479);
+            this.tbLogInfo.Multiline = true;
+            this.tbLogInfo.Name = "tbLogInfo";
+            this.tbLogInfo.Size = new System.Drawing.Size(868, 56);
+            this.tbLogInfo.TabIndex = 5;
+            // 
             // MainWindow
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 533);
+            this.Controls.Add(this.tbLogInfo);
             this.Controls.Add(this.navBarControlMain);
             this.Controls.Add(this.ribbonControl1);
             this.Name = "MainWindow";
@@ -202,6 +212,7 @@
         private DevExpress.XtraNavBar.NavBarItem navBarItemServiceMail;
         private DevExpress.XtraNavBar.NavBarItem navBarItemOrders;
         private DevExpress.XtraBars.BarButtonItem barButtonLogin;
+        private System.Windows.Forms.TextBox tbLogInfo;
     }
 }
 

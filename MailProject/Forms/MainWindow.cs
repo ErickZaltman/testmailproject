@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace MailProject
 {
@@ -6,29 +9,36 @@ namespace MailProject
     {
 
         private Person currentUser;
-        public string userName;
+        ConnectionToServer serverConnection;
+        public void InitSettings()
+        {
+            serverConnection = new ConnectionToServer();
+            serverConnection.ServerName = @"WSCH-666\zalupakita";
+            serverConnection.BaseName = "TestMailBase";
+            serverConnection.Connect();
 
-        //public Person CurrentUser
-        //{
-        //    get
-        //    {
-        //        return currentUser;
-        //    }
+            currentUser = serverConnection.getPersonInfo(Environment.UserName);
 
-        //    set
-        //    {
-        //        currentUser = value;
-        //    }
-        //}
-    
+            tbLogInfo.Text = currentUser.ToString();
+
+        }
+
+        
+
+
+
+
         public MainWindow()
         {
             InitializeComponent();
-
             currentUser = new Person();
-            navBarControlMain.Visible = false;
-
+            InitSettings();
         }
+
+
+
+
+
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
@@ -46,18 +56,21 @@ namespace MailProject
         }
         private void Authorization()
         {
-           
+
             Forms.AuthorizationWindow newAuthForm = new Forms.AuthorizationWindow(dataFunc);
-            
+
             newAuthForm.ShowDialog();
             if (newAuthForm.DialogResult == DialogResult.OK)
             {
                 navBarControlMain.Visible = true;
                 //barButtonLogin.Visibility = /*DevExpress.XtraBars.BarItemVisibility*/;
+                //MessageBox.Show(Environment.UserDomainName);
+                //MessageBox.Show(Environment.UserName);
+
             }
         }
 
-        
+
 
     }
 }

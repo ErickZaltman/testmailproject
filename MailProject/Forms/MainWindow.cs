@@ -52,6 +52,8 @@ namespace MailProject
             newAuthForm.ShowDialog();
             if (newAuthForm.DialogResult == DialogResult.OK)
             {
+                navBarControlMain.Visible = true;
+                //barButtonLogin.Visibility = /*DevExpress.XtraBars.BarItemVisibility*/;
             }
         }
 

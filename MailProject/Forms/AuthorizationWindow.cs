@@ -19,7 +19,13 @@ namespace MailProject.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (AuthenticationCheck(tbLogin.Text,tbPassword.Text)) {
+            Autorization();
+        }
+
+        private void Autorization()
+        {
+            if (AuthenticationCheck(tbLogin.Text, tbPassword.Text))
+            {
                 d(tbLogin.Text);
                 DialogResult = DialogResult.OK;
                 Close();
@@ -28,7 +34,6 @@ namespace MailProject.Forms
             {
                 MessageBox.Show("Неверное имя пользователя или пароль");
             }
-
         }
 
         private bool AuthenticationCheck(string login, string password)
@@ -39,6 +44,19 @@ namespace MailProject.Forms
                 return true;
             }
             return false;
+        }
+
+      
+        private void tbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Autorization();
+        }
+
+        private void tbLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Autorization();
         }
     }
 }

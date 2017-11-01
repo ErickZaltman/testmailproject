@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.barButtonLogin = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupNewDocuments = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.navBarControlMain = new DevExpress.XtraNavBar.NavBarControl();
@@ -42,7 +43,6 @@
             this.navBarInnerDocuments = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemServiceMail = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemOrders = new DevExpress.XtraNavBar.NavBarItem();
-            this.barButtonLogin = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,13 @@
             this.ribbonPage1});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2010;
             this.ribbonControl1.Size = new System.Drawing.Size(868, 143);
+            // 
+            // barButtonLogin
+            // 
+            this.barButtonLogin.Caption = "Войти в систему";
+            this.barButtonLogin.Id = 5;
+            this.barButtonLogin.Name = "barButtonLogin";
+            this.barButtonLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonLogin_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -99,6 +106,7 @@
             // navBarGrInnerMail
             // 
             this.navBarGrInnerMail.Caption = "Внутренняя Почта";
+            this.navBarGrInnerMail.Expanded = true;
             this.navBarGrInnerMail.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemInnerIncoming),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemInnerOutgoing)});
@@ -117,6 +125,7 @@
             // navBarGrOutterMail
             // 
             this.navBarGrOutterMail.Caption = "Внешняя корреспонденция";
+            this.navBarGrOutterMail.Expanded = true;
             this.navBarGrOutterMail.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemOuterIncomingMail),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemOuterOutgoingMail),
@@ -141,6 +150,7 @@
             // navBarInnerDocuments
             // 
             this.navBarInnerDocuments.Caption = "Служебные записки и приказы";
+            this.navBarInnerDocuments.Expanded = true;
             this.navBarInnerDocuments.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.SmallIconsText;
             this.navBarInnerDocuments.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItemServiceMail),
@@ -156,13 +166,6 @@
             // 
             this.navBarItemOrders.Caption = "Приказы";
             this.navBarItemOrders.Name = "navBarItemOrders";
-            // 
-            // barButtonLogin
-            // 
-            this.barButtonLogin.Caption = "Войти в систему";
-            this.barButtonLogin.Id = 5;
-            this.barButtonLogin.Name = "barButtonLogin";
-            this.barButtonLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonLogin_ItemClick);
             // 
             // MainWindow
             // 

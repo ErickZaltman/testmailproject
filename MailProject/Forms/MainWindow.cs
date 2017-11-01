@@ -20,7 +20,7 @@ namespace MailProject
         //        currentUser = value;
         //    }
         //}
-
+    
         public MainWindow()
         {
             InitializeComponent();
@@ -37,14 +37,14 @@ namespace MailProject
 
         private void barButtonLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Authorize();
+            Authorization();
         }
 
         void dataFunc(string data)
         {
             currentUser.LoginName = data;
         }
-        private void Authorize()
+        private void Authorization()
         {
            
             Forms.AuthorizationWindow newAuthForm = new Forms.AuthorizationWindow(dataFunc);
@@ -52,8 +52,6 @@ namespace MailProject
             newAuthForm.ShowDialog();
             if (newAuthForm.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show("sdfsd");
-                MessageBox.Show(currentUser.LoginName);
             }
         }
 

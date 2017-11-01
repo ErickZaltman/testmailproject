@@ -24,9 +24,10 @@ namespace MailProject
 
                
         }
-        
     }
     public delegate void delegateFunc(string data);
+    
+    
 
 
 }

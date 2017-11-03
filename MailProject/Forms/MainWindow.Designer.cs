@@ -30,8 +30,15 @@
         {
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonLogin = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupNewDocuments = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbnTestGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.navBarControlMain = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGrInnerMail = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemInnerIncoming = new DevExpress.XtraNavBar.NavBarItem();
@@ -44,6 +51,7 @@
             this.navBarItemServiceMail = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItemOrders = new DevExpress.XtraNavBar.NavBarItem();
             this.tbLogInfo = new System.Windows.Forms.TextBox();
+            this.btnClearLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).BeginInit();
             this.SuspendLayout();
@@ -53,9 +61,15 @@
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
-            this.barButtonLogin});
+            this.barButtonLogin,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem3,
+            this.barButtonItem4,
+            this.barButtonItem5,
+            this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 6;
+            this.ribbonControl1.MaxItemId = 12;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -69,10 +83,50 @@
             this.barButtonLogin.Name = "barButtonLogin";
             this.barButtonLogin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonLogin_ItemClick);
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "СписокПользователей";
+            this.barButtonItem1.Id = 6;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Текущий Пользователь";
+            this.barButtonItem2.Id = 7;
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Входящая почта";
+            this.barButtonItem3.Id = 8;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Исходящая почта";
+            this.barButtonItem4.Id = 9;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // barButtonItem5
+            // 
+            this.barButtonItem5.Caption = "barButtonItem5";
+            this.barButtonItem5.Id = 10;
+            this.barButtonItem5.Name = "barButtonItem5";
+            // 
+            // barButtonItem6
+            // 
+            this.barButtonItem6.Caption = "barButtonItem6";
+            this.barButtonItem6.Id = 11;
+            this.barButtonItem6.Name = "barButtonItem6";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroupNewDocuments});
+            this.ribbonPageGroupNewDocuments,
+            this.rbnTestGroup});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "ribbonPage1";
             // 
@@ -81,6 +135,17 @@
             this.ribbonPageGroupNewDocuments.ItemLinks.Add(this.barButtonLogin);
             this.ribbonPageGroupNewDocuments.Name = "ribbonPageGroupNewDocuments";
             this.ribbonPageGroupNewDocuments.Text = "etc";
+            // 
+            // rbnTestGroup
+            // 
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem1);
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem2);
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem3);
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem4);
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem5);
+            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem6);
+            this.rbnTestGroup.Name = "rbnTestGroup";
+            this.rbnTestGroup.Text = "Проверочная Группа";
             // 
             // navBarControlMain
             // 
@@ -97,10 +162,10 @@
             this.navBarItemTreatmentMail,
             this.navBarItemServiceMail,
             this.navBarItemOrders});
-            this.navBarControlMain.Location = new System.Drawing.Point(0, 149);
+            this.navBarControlMain.Location = new System.Drawing.Point(0, 140);
             this.navBarControlMain.Name = "navBarControlMain";
             this.navBarControlMain.OptionsNavPane.ExpandedWidth = 199;
-            this.navBarControlMain.Size = new System.Drawing.Size(199, 263);
+            this.navBarControlMain.Size = new System.Drawing.Size(199, 272);
             this.navBarControlMain.TabIndex = 1;
             this.navBarControlMain.Text = "navBarControl1";
             // 
@@ -170,11 +235,24 @@
             // 
             // tbLogInfo
             // 
-            this.tbLogInfo.Location = new System.Drawing.Point(0, 479);
+            this.tbLogInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbLogInfo.Location = new System.Drawing.Point(0, 460);
             this.tbLogInfo.Multiline = true;
             this.tbLogInfo.Name = "tbLogInfo";
-            this.tbLogInfo.Size = new System.Drawing.Size(868, 56);
+            this.tbLogInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tbLogInfo.Size = new System.Drawing.Size(868, 75);
             this.tbLogInfo.TabIndex = 5;
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Location = new System.Drawing.Point(746, 25);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(75, 23);
+            this.btnClearLog.TabIndex = 7;
+            this.btnClearLog.Text = "Очистить";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
             // MainWindow
             // 
@@ -182,6 +260,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 533);
+            this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.tbLogInfo);
             this.Controls.Add(this.navBarControlMain);
             this.Controls.Add(this.ribbonControl1);
@@ -213,6 +292,13 @@
         private DevExpress.XtraNavBar.NavBarItem navBarItemOrders;
         private DevExpress.XtraBars.BarButtonItem barButtonLogin;
         private System.Windows.Forms.TextBox tbLogInfo;
+        private System.Windows.Forms.Button btnClearLog;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnTestGroup;
     }
 }
-

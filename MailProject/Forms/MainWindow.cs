@@ -63,12 +63,12 @@ namespace MailProject
 
         void dataFunc(string data)
         {
-
+            
             currentUser.LoginName = data;
         }
         private void Authorization()
         {
-
+            
             Forms.AuthorizationWindow newAuthForm = new Forms.AuthorizationWindow(dataFunc);
 
             newAuthForm.ShowDialog();
@@ -84,6 +84,7 @@ namespace MailProject
 
         private void btnClearLog_Click(object sender, EventArgs e)
         {
+            
             clearLog();
         }
 
@@ -95,6 +96,7 @@ namespace MailProject
             {
                 tbLogInfo.Text += tmpPerson.Id + ";" + tmpPerson.LoginName + ";" + "\r\n";
             }
+            
 
         }
         private void clearLog()
@@ -109,7 +111,7 @@ namespace MailProject
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            
         }
     }
 }

@@ -237,6 +237,7 @@ namespace MailProject
         private int id;
         private int authorID;
         private DateTime date;
+        private string theme;
 
         public int ID
         {
@@ -278,15 +279,6 @@ namespace MailProject
                 date = value;
             }
         }
-    }
-
-    public class InnerMail : Document
-    {
-        private string theme;
-        private int destination;
-        private string files;
-        private string text;
-        private bool isRead;
 
         public string Theme
         {
@@ -300,6 +292,15 @@ namespace MailProject
                 theme = value;
             }
         }
+    }
+
+    public class InnerMail : Document
+    {
+        private int destination;
+        private string files;
+        private string text;
+        private bool isRead;
+
 
         public int Destination
         {
@@ -356,7 +357,7 @@ namespace MailProject
             this.ID = ID;
             this.AuthorID = AuthorID;
             this.Text = Text;
-            this.Theme = theme;
+            this.Theme = Theme;
             this.Destination = Destination;
             this.Files = Files;
             this.IsRead = IsRead;
@@ -374,12 +375,198 @@ namespace MailProject
             Destination = (int)dataRow["Destination"];
             Files = (string)dataRow["Files"];
             IsRead = (bool)dataRow["IsRead"];
+            Date = (DateTime)dataRow["Date"];
+
+        }
+        public InnerMail(DataRow dataRow, bool head)
+        {
+            ID = (int)dataRow["ID"];
+            AuthorID = (int)dataRow["Author"];
+            Theme = (string)dataRow["Theme"];
+            IsRead = (bool)dataRow["IsRead"];
+            Date = (DateTime)dataRow["Date"];
+
+        }
+        public InnerMail(int author, DataRow dataRow)
+        {
+            ID = (int)dataRow["ID"];
+            AuthorID = author;
+            Theme = (string)dataRow["Theme"];
+            IsRead = (bool)dataRow["IsRead"];
+            Date = (DateTime)dataRow["Date"];
 
         }
 
         public override string ToString()
         {
-            return ID + ";" + AuthorID + ";" + Text + ";" + Theme + ";" + Destination + ";" + IsRead;
+            return ID + ";" + AuthorID + ";" + Date + ";" + Theme + ";" + Destination + ";" + IsRead;
+        }
+    }
+
+    public class IncomingMail : Document
+    {
+        private int type;
+        private int departmentID;
+        private string sender;
+        private int destination;
+        private DateTime executionTime;
+        private string etc;
+        private string anwser;
+        private string note;
+        private string regNumber;
+        
+
+        public int Type
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                type = value;
+            }
+        }
+        public int DepartmentID
+        {
+            get
+            {
+                return departmentID;
+            }
+
+            set
+            {
+                departmentID = value;
+            }
+        }
+        public string Sender
+        {
+            get
+            {
+                return sender;
+            }
+
+            set
+            {
+                sender = value;
+            }
+        }
+        public int Destination
+        {
+            get
+            {
+                return destination;
+            }
+
+            set
+            {
+                destination = value;
+            }
+        }
+        public DateTime ExecutionTime
+        {
+            get
+            {
+                return executionTime;
+            }
+
+            set
+            {
+                executionTime = value;
+            }
+        }
+        public string Etc
+        {
+            get
+            {
+                return etc;
+            }
+
+            set
+            {
+                etc = value;
+            }
+        }
+        public string Anwser
+        {
+            get
+            {
+                return anwser;
+            }
+
+            set
+            {
+                anwser = value;
+            }
+        }
+        public string Note
+        {
+            get
+            {
+                return note;
+            }
+
+            set
+            {
+                note = value;
+            }
+        }
+        public string RegNumber
+        {
+            get
+            {
+                return regNumber;
+            }
+
+            set
+            {
+                regNumber = value;
+            }
+        }
+
+        public IncomingMail(int ID, int AuthorID, string Theme, int Destination, int Type, int departmentID , string sender,
+            DateTime ExecutionTime, string etc, string note, string anwser, string regNumber)
+        {
+            this.ID = ID;
+            this.AuthorID = AuthorID;
+            this.Theme = Theme;
+            this.Destination = Destination;
+            this.type = Type;
+            this.departmentID = departmentID;
+            this.sender = sender;
+            this.executionTime = executionTime;
+            this.etc = etc;
+            this.note = note;
+            this.anwser = anwser;
+            this.regNumber = regNumber;
+
+
+        }
+        public IncomingMail()
+        {
+
+        }
+        public IncomingMail(DataRow dataRow)
+        {
+            ID = (int)dataRow["ID"];
+            AuthorID = (int)dataRow["Author"];
+            Theme = (string)dataRow["Theme"];
+            Destination = (int)dataRow["Destination"];
+            Date = (DateTime)dataRow["Date"];
+            DepartmentID = (int)dataRow["DepartmentID"];
+            Sender = (string)dataRow["Sender"];
+            Note = (string)dataRow["Note"];
+            Etc = (string)dataRow["Etc"];
+            RegNumber = (string)dataRow["RegNumber"];
+            ExecutionTime = (DateTime)dataRow["ExecutionTime"];
+
+
+        }
+
+        public override string ToString()
+        {
+            return ID + ";" + AuthorID + ";" + Theme + ";" + Destination + ";" + DepartmentID;
         }
     }
 
@@ -521,35 +708,45 @@ namespace MailProject
         //}
 
 
-        public DataTable getInnerIncomingMailHead(Person user)
+        public List<InnerMail> getInnerIncomingMailHead(Person user)
         {
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.InnerMail.Author, dbo.InnerMail.Theme, dbo.InnerMail.Date, dbo.InnerMail.IsRead FROM dbo.InnerMail INNER JOIN dbo.Users ON dbo.InnerMail.ID = dbo.Users.ID WHERE(dbo.InnerMail.Destination = " + user.Id + ")";
+            cmd.CommandText = "SELECT dbo.InnerMail.ID, dbo.InnerMail.Author, dbo.InnerMail.Theme, dbo.InnerMail.Date, dbo.InnerMail.IsRead FROM dbo.InnerMail  WHERE(dbo.InnerMail.Destination = " + user.Id + ")";
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
             sqladd.Fill(dt);
             connection.Close();
-
-            return dt;
+            List<InnerMail> tmpList = new List<InnerMail>();
+            foreach(DataRow row in dt.Rows)
+            {
+                tmpList.Add(new InnerMail(row,false));
+            }
+            return tmpList;
         }
-        public DataTable getInnerOutgoingMailHead(Person user)
+        public List<InnerMail> getInnerOutgoingMailHead(Person user)
         {
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.InnerMail.Destination, dbo.InnerMail.Theme, dbo.InnerMail. FROM dbo.InnerMail INNER JOIN dbo.Users ON dbo.InnerMail.ID = dbo.Users.ID WHERE(dbo.InnerMail.Author = " + user.Id + ")";
+            cmd.CommandText = "SELECT dbo.InnerMail.ID, dbo.InnerMail.Destination, dbo.InnerMail.Theme, dbo.InnerMail.Date, dbo.InnerMail.IsRead FROM dbo.InnerMail WHERE(dbo.InnerMail.Author = " + user.Id + ")";
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
             sqladd.Fill(dt);
             connection.Close();
 
-            return dt;
+            List<InnerMail> tmpList = new List<InnerMail>();
+            foreach (DataRow row in dt.Rows)
+            {
+                tmpList.Add(new InnerMail(user.Id, row));
+            }
+
+            return tmpList;
         }
 
         public DataRow getDocumentInfo(int mailID, string tableName)

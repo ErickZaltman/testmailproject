@@ -21,16 +21,9 @@ namespace MailProject
             currentUser = serverConnection.getPerson(Environment.UserName);
 
             tbLogInfo.Text = currentUser.ToString();
-            getMail();
 
         }
-        private void getMail()
-        {
-            DataTable dt = serverConnection.getInnerIncomingMailHead(currentUser);
-            tbLogInfo.Text += "\r\n" + dt.Rows.Count;
-            tbLogInfo.Text += ";" + dt.Rows[0]["Theme"].ToString() + ";" + dt.Rows[0]["Author"].ToString();
-
-        }
+       
 
 
 
@@ -110,8 +103,25 @@ namespace MailProject
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
-            tbLogInfo.Text = test.ToString();
+            List<InnerMail> dt = serverConnection.getInnerIncomingMailHead(currentUser);
+            //InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
+            clearLog();
+            foreach(InnerMail mail in dt)
+            {
+                tbLogInfo.Text +=mail.ToString() +  ";\r\n";
+            }
+            //tbLogInfo.Text = test.ToString();
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            List<InnerMail> dt = serverConnection.getInnerOutgoingMailHead(currentUser);
+            //InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
+            clearLog();
+            foreach (InnerMail mail in dt)
+            {
+                tbLogInfo.Text += mail.ToString() + ";\r\n";
+            }
         }
     }
 }

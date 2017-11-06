@@ -84,7 +84,6 @@ namespace MailProject
 
         private void btnClearLog_Click(object sender, EventArgs e)
         {
-            
             clearLog();
         }
 
@@ -111,7 +110,8 @@ namespace MailProject
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
+            InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
+            tbLogInfo.Text = test.ToString();
         }
     }
 }

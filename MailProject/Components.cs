@@ -5,9 +5,26 @@ using System.Data.SqlClient;
 
 namespace MailProject
 {
+    public class TableName
+    {
+        private TableName(string value) { Value = value; }
 
+        public string Value { get; set; }
+
+        public static TableName InnerMail { get { return new TableName("InnerMail"); } }
+        public static TableName Departments { get { return new TableName("Departments"); } }
+        public static TableName Contractors { get { return new TableName("Contractors"); } }
+        public static TableName IncomingMail { get { return new TableName("IncomingMail"); } }
+        public static TableName OutgoingMail { get { return new TableName("OutgoingMail"); } }
+        public static TableName ServiceMail { get { return new TableName("ServiceMail"); } }
+        public static TableName TreatmentMail { get { return new TableName("TreatmentMail"); } }
+        public static TableName UserInfo { get { return new TableName("UserInfo"); } }
+        public static TableName User { get { return new TableName("User"); } }
+    }
     public class Person
     {
+
+        
         private string loginName;
         private string firstName;
         private string patronycName;
@@ -178,6 +195,22 @@ namespace MailProject
             deptID = deptid;
         }
 
+        public Person(DataRow dataRow)
+        {
+
+            Id = (int)dataRow["ID"];
+            LoginName = (string)dataRow["Login"];
+            FirstName = (string)dataRow["FirstName"];
+            PatronycName = (string)dataRow["Patronymic"];
+            Surname = (string)dataRow["Surname"];
+            Sex = (bool)dataRow["Sex"];
+            DeptID = (int)dataRow["DepartmentID"]; ;
+            Email = (string)dataRow["Email"];
+            MobileNumber = (string)dataRow["MobileNumber"];
+            PhoneNumber = (string)dataRow["PhoneNumber"];
+
+        }
+
         /// <summary>
         /// Инициализация пустого экземпляра клаcса 
         /// </summary>
@@ -189,6 +222,8 @@ namespace MailProject
 
         public override string ToString()
         {
+
+            
             return loginName + "; " + firstName + "; " + patronycName + "; " + surname + "; " + mobileNumber + "; " +
                 phoneNumber + "; " + email + "; " + id + "; " + email + "; " + sex + "; " + deptID;
         }
@@ -207,12 +242,12 @@ namespace MailProject
         {
             get
             {
-                return ID;
+                return id;
             }
 
             set
             {
-                ID = value;
+                id = value;
             }
         }
 
@@ -220,12 +255,12 @@ namespace MailProject
         {
             get
             {
-                return AuthorID;
+                return authorID;
             }
 
             set
             {
-                AuthorID = value;
+                authorID = value;
             }
         }
 
@@ -308,12 +343,12 @@ namespace MailProject
         {
             get
             {
-                return Text;
+                return text;
             }
 
             set
             {
-                Text = value;
+                text = value;
             }
         }
         public InnerMail(int ID, int AuthorID, string Text, string Theme, int Destination, string Files, bool IsRead)
@@ -326,6 +361,21 @@ namespace MailProject
             this.Files = Files;
             this.IsRead = IsRead;
         }
+        public InnerMail()
+        {
+
+        }
+        public InnerMail(DataRow dataRow)
+        {
+            ID = (int)dataRow["ID"];
+            AuthorID= (int)dataRow["Author"];
+            Text = (string)dataRow["Text"];
+            Theme = (string)dataRow["Theme"];
+            Destination = (int)dataRow["Destination"];
+            Files = (string)dataRow["Files"];
+            IsRead = (bool)dataRow["IsRead"];
+
+        }
 
         public override string ToString()
         {
@@ -336,6 +386,7 @@ namespace MailProject
 
     public class ConnectionToServer
     {
+       
         private string host;
         private string serverName;
         private string baseName;
@@ -420,8 +471,9 @@ namespace MailProject
 
             sqladd.Fill(dt);
             connection.Close();
+            //Person tmpPerson = new Person(dt.Rows[0]);
 
-            return getPersonInfo(dt.Rows[0]);
+            return new Person(dt.Rows[0]);
         }
         public List<Person> getUsersList()
         {
@@ -439,33 +491,34 @@ namespace MailProject
 
             foreach (DataRow row in dt.Rows)
             {
-                tmpList.Add(getPersonInfo(row));
+                tmpList.Add(new Person(row));
             }
 
             return tmpList;
         }
-        private Person getPersonInfo(DataRow row)
-        {
-            Person tmpPerson = new Person();
-            int tmpInt = 0;
-            bool tmpBool = false;
 
-            int.TryParse(row["ID"].ToString(), out tmpInt);
-            tmpPerson.Id = tmpInt;
-            tmpPerson.LoginName = row["Login"] as string;
-            tmpPerson.FirstName = row["FirstName"] as string;
-            tmpPerson.PatronycName = row["Patronymic"] as string;
-            tmpPerson.Surname = row["Surname"] as string;
-            bool.TryParse(row["Sex"].ToString(), out tmpBool);
-            tmpPerson.Sex = tmpBool;
-            int.TryParse(row["DepartmentID"] as string, out tmpInt);
-            tmpPerson.DeptID = tmpInt;
-            tmpPerson.Email = row["Email"] as string;
-            tmpPerson.MobileNumber = row["MobileNumber"] as string;
-            tmpPerson.PhoneNumber = row["PhoneNumber"] as string;
+        //private Person getPersonInfo(DataRow row)
+        //{
+        //    Person tmpPerson = new Person();
+        //    int tmpInt = 0;
+        //    bool tmpBool = false;
 
-            return tmpPerson;
-        }
+        //    int.TryParse(row["ID"].ToString(), out tmpInt);
+        //    tmpPerson.Id = tmpInt;
+        //    tmpPerson.LoginName = row["Login"] as string;
+        //    tmpPerson.FirstName = row["FirstName"] as string;
+        //    tmpPerson.PatronycName = row["Patronymic"] as string;
+        //    tmpPerson.Surname = row["Surname"] as string;
+        //    bool.TryParse(row["Sex"].ToString(), out tmpBool);
+        //    tmpPerson.Sex = tmpBool;
+        //    int.TryParse(row["DepartmentID"] as string, out tmpInt);
+        //    tmpPerson.DeptID = tmpInt;
+        //    tmpPerson.Email = row["Email"] as string;
+        //    tmpPerson.MobileNumber = row["MobileNumber"] as string;
+        //    tmpPerson.PhoneNumber = row["PhoneNumber"] as string;
+
+        //    return tmpPerson;
+        //}
 
 
         public DataTable getInnerIncomingMailHead(Person user)
@@ -497,6 +550,22 @@ namespace MailProject
             connection.Close();
 
             return dt;
+        }
+
+        public DataRow getDocumentInfo(int mailID, string tableName)
+        {
+            DataTable dt = new DataTable();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT dbo."+tableName+".* FROM dbo." + tableName+" INNER JOIN dbo.Users ON dbo."+ tableName + ".ID = dbo.Users.ID WHERE(dbo.InnerMail.ID = " + mailID + ")";
+
+            connection.Open();
+            SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
+            sqladd.Fill(dt);
+            connection.Close();
+
+            return dt.Rows[0];
         }
 
 

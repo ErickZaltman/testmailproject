@@ -123,5 +123,22 @@ namespace MailProject
                 tbLogInfo.Text += mail.ToString() + ";\r\n";
             }
         }
+
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            clearLog();
+            List<IncomingMail> tmpList = serverConnection.getIncomingMailHead();
+            foreach(IncomingMail mail in tmpList)
+            {
+               tbLogInfo.Text+= mail.ToString();
+            }
+        }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            UserControl1 tmpUIc = new UserControl1();
+            tmpUIc.Author = serverConnection.getPersonNameByID(1);
+            this.Controls.Add(tmpUIc);
+        }
     }
 }

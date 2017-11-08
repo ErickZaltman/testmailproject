@@ -130,3 +130,5 @@ D:\vsp\MailProject\MailProject\obj\Debug\MailProject.Forms.AuthorizationWindow.r
 \\172.24.8.84\d$\vsp\MailProject\MailProject\bin\Debug\es\DevExpress.Pdf.v16.1.Core.resources.dll
 \\172.24.8.84\d$\vsp\MailProject\MailProject\bin\Debug\ja\DevExpress.Pdf.v16.1.Core.resources.dll
 \\172.24.8.84\d$\vsp\MailProject\MailProject\bin\Debug\ru\DevExpress.Pdf.v16.1.Core.resources.dll
+D:\vsp\MailProject\MailProject\obj\Debug\MailProject.UserControl1.resources
+\\172.24.8.84\d$\vsp\MailProject\MailProject\obj\Debug\MailProject.UserControl1.resources

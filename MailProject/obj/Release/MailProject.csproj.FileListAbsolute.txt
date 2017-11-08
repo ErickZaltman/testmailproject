@@ -64,3 +64,4 @@ D:\vsp\MailProject\MailProject\obj\Release\MailProject.csproj.GenerateResource.C
 D:\vsp\MailProject\MailProject\obj\Release\MailProject.exe.licenses
 D:\vsp\MailProject\MailProject\obj\Release\MailProject.exe
 D:\vsp\MailProject\MailProject\obj\Release\MailProject.pdb
+D:\vsp\MailProject\MailProject\obj\Release\MailProject.UserControl1.resources

@@ -138,7 +138,16 @@ namespace MailProject
         {
             UserControl1 tmpUIc = new UserControl1();
             tmpUIc.Author = serverConnection.getPersonNameByID(1);
+            tmpUIc.Location = new System.Drawing.Point(200, 200);
+            tmpUIc.Click += new EventHandler(test);
+
+
             this.Controls.Add(tmpUIc);
+        }
+
+        private  void test(object sender,EventArgs e)
+        {
+            MessageBox.Show("LEL");
         }
     }
 }

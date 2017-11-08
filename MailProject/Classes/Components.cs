@@ -168,7 +168,7 @@ namespace MailProject
             DataTable dt = new DataTable();
             cmd.Connection = connection;
             cmd.CommandText = "SELECT dbo.UserInfo.* , dbo.Users.Login FROM dbo.UserInfo INNER JOIN dbo.Users ON dbo.UserInfo.ID = dbo.Users.ID WHERE dbo.Users.Login = '" + login + "'";
-            connection.Open();
+                connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
 
             sqladd.Fill(dt);
@@ -291,15 +291,15 @@ namespace MailProject
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.UserInfo.Surname, dbo.UserInfo.FirstName, dbo.UserInfo.Patronimyc FROM dbo.UserInfo Where dbo.UserInfo.ID = " +id;
+            cmd.CommandText = "SELECT dbo.UserInfo.Surname, dbo.UserInfo.FirstName, dbo.UserInfo.Patronymic FROM dbo.UserInfo Where dbo.UserInfo.ID = " + id;
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
             sqladd.Fill(dt);
             connection.Close();
 
-
-            return (string)dt.Rows[0]["Surname"] + " " + (string)dt.Rows[0]["FirstName"] + " " + (string)dt.Rows[0]["Patronymic"];
+            
+            return (string)dt.Rows[0]["Surname"] + " " + ((string)dt.Rows[0]["FirstName"])[0] + "." + ((string)dt.Rows[0]["Patronymic"])[0];
         }
 
 

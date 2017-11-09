@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+
 
 namespace MailProject
 {
@@ -78,7 +75,7 @@ namespace MailProject
         {
 
         }
-        public InnerMail(DataRow dataRow)
+        public InnerMail(System.Data.DataRow dataRow)
         {
             ID = (int)dataRow["ID"];
             AuthorID = (int)dataRow["Author"];
@@ -90,29 +87,9 @@ namespace MailProject
             Date = (DateTime)dataRow["Date"];
 
         }
-        public InnerMail(DataRow dataRow, bool head)
-        {
-            ID = (int)dataRow["ID"];
-            AuthorID = (int)dataRow["Author"];
-            Theme = (string)dataRow["Theme"];
-            IsRead = (bool)dataRow["IsRead"];
-            Date = (DateTime)dataRow["Date"];
+        
 
-        }
-        public InnerMail(int author, DataRow dataRow)
-        {
-            ID = (int)dataRow["ID"];
-            AuthorID = author;
-            Theme = (string)dataRow["Theme"];
-            IsRead = (bool)dataRow["IsRead"];
-            Date = (DateTime)dataRow["Date"];
-
-        }
-
-        public override string ToString()
-        {
-            return ID + ";" + AuthorID + ";" + Date + ";" + Theme + ";" + Destination + ";" + IsRead;
-        }
+        
     }
 
 }

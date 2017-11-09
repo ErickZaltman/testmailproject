@@ -60,14 +60,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Documents\OutgoingMail.cs" />
-    <Compile Include="Classes\Documents\ServiceMail.cs" />
-    <Compile Include="Classes\Documents\IncomingMail.cs" />
-    <Compile Include="Classes\Documents\InnerMail.cs" />
-    <Compile Include="Classes\Components.cs" />
-    <Compile Include="Classes\Documents\TreatmentMail.cs" />
-    <Compile Include="Classes\ppl\Applicant.cs" />
-    <Compile Include="Classes\ppl\Person.cs" />
+    <Compile Include="cs\Documents\OutgoingMail.cs" />
+    <Compile Include="cs\Documents\ServiceMail.cs" />
+    <Compile Include="cs\Documents\IncomingMail.cs" />
+    <Compile Include="cs\Documents\InnerMail.cs" />
+    <Compile Include="cs\Components.cs" />
+    <Compile Include="cs\Documents\TreatmentMail.cs" />
+    <Compile Include="cs\ppl\Applicant.cs" />
+    <Compile Include="cs\ppl\Person.cs" />
     <Compile Include="Forms\AuthorizationWindow.cs">
       <SubType>Form</SubType>
     </Compile>

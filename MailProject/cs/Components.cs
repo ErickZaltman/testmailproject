@@ -83,6 +83,12 @@ namespace MailProject
                 theme = value;
             }
         }
+
+       
+        public override string ToString()
+        {
+            return id + ";" + authorID + ";" + theme + ";" + date;
+        }
     }   
     
 
@@ -201,13 +207,13 @@ namespace MailProject
 
         
 
-        public DataRow getDocumentInfo(int mailID, string tableName)
+        public InnerMail getInnerMailInfo(int mailID)
         {
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo." + tableName + ".* FROM dbo." + tableName + " INNER JOIN dbo.Users ON dbo." + tableName + ".ID = dbo.Users.ID WHERE(dbo.InnerMail.ID = " + mailID + ")";
+            cmd.CommandText = "SELECT dbo.InnerMail.* FROM dbo.InnerMail WHERE(dbo.InnerMail.ID = " + mailID + ")";
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
@@ -215,36 +221,39 @@ namespace MailProject
             connection.Close();
 
 
-            return (dt.Rows[0]);
+            return (new InnerMail(dt.Rows[0]));
         }
 
 
-        public List<InnerMail> getInnerIncomingMailHead(Person user)
+        public DataTable getInnerOutgoingMailHead(Person user)
         {
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.InnerMail.ID, dbo.InnerMail.Author, dbo.InnerMail.Theme, dbo.InnerMail.Date, dbo.InnerMail.IsRead FROM dbo.InnerMail  WHERE(dbo.InnerMail.Destination = " + user.Id + ")";
+            cmd.CommandText = "SELECT InnerMail.ID, InnerMail.Theme, InnerMail.Date, InnerMail.IsRead, " +
+                 "UserInfo.Surname + ' ' + Left(UserInfo.FirstName, 1) +'.' + Left(UserInfo.Patronymic,1) +'.' as Destination " +
+                 "FROM InnerMail INNER JOIN UserInfo ON InnerMail.Destination = UserInfo.ID " +
+                 "WHERE InnerMail.Author = " + user.Id;
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
             sqladd.Fill(dt);
             connection.Close();
             List<InnerMail> tmpList = new List<InnerMail>();
-            foreach (DataRow row in dt.Rows)
-            {
-                tmpList.Add(new InnerMail(row, false));
-            }
-            return tmpList;
+           
+            return dt;
         }
-        public List<InnerMail> getInnerOutgoingMailHead(Person user)
+        public DataTable getInnerIncomingMailHead(Person user)
         {
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.InnerMail.ID, dbo.InnerMail.Destination, dbo.InnerMail.Theme, dbo.InnerMail.Date, dbo.InnerMail.IsRead FROM dbo.InnerMail WHERE(dbo.InnerMail.Author = " + user.Id + ")";
+            cmd.CommandText = "SELECT InnerMail.ID, InnerMail.Theme, InnerMail.Date, InnerMail.IsRead, " +
+                "UserInfo.Surname + ' ' + Left(UserInfo.FirstName, 1) +'.' + Left(UserInfo.Patronymic,1) +'.' as Author " +
+                "FROM InnerMail INNER JOIN UserInfo ON InnerMail.Author = UserInfo.ID " +
+                "WHERE InnerMail.Destination = " + user.Id;
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
@@ -252,37 +261,82 @@ namespace MailProject
             connection.Close();
 
             List<InnerMail> tmpList = new List<InnerMail>();
-            foreach (DataRow row in dt.Rows)
-            {
-                tmpList.Add(new InnerMail(user.Id, row));
-            }
+            
 
-            return tmpList;
+            return dt;
         }
-
-        public List<IncomingMail> getIncomingMailHead()
+        public DataTable getOutgoingMailHead()
         {
-
             DataTable dt = new DataTable();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT dbo.IncomingMail.ID, dbo.IncomingMail.DocumentAuthor, dbo.IncomingMail.Theme, dbo.IncomingMail.Date, dbo.IncomingMail.Sender FROM dbo.IncomingMail";
+            cmd.CommandText = "SELECT OutgoingMail.ID, OutgoingMail.Date, OutgoingMail.Theme, OutgoingMail.RegNumber, UserInfo.Surname + ' ' + left(UserInfo.FirstName,1) + '.' + left(UserInfo.Patronymic,1) as Author " + 
+                "FROM OutgoingMail INNER JOIN " +
+                "UserInfo ON OutgoingMail.AuthorID = UserInfo.ID";
 
             connection.Open();
             SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
             sqladd.Fill(dt);
             connection.Close();
 
-            List<IncomingMail> tmpList = new List<IncomingMail>();
-            foreach (DataRow row in dt.Rows)
-            {
-                tmpList.Add(new IncomingMail(row, false));
-            }
+            List<InnerMail> tmpList = new List<InnerMail>();
+            
 
-
-            return tmpList;
+            return dt;
         }
+        public DataTable getServiceMailHead()
+        {
+            DataTable dt = new DataTable();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT ServiceMail.ID, ServiceMail.Date, ServiceMail.Theme, ServiceMail.RegNumber, UserInfo.Surname + ' ' + left(UserInfo.FirstName,1) + '.' + left(UserInfo.Patronymic,1) as Author " +
+                "FROM ServiceMail INNER JOIN " +
+                "UserInfo ON ServiceMail.AuthorID = UserInfo.ID";
+
+            connection.Open();
+            SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
+            sqladd.Fill(dt);
+            connection.Close();
+
+            List<InnerMail> tmpList = new List<InnerMail>();
+
+
+            return dt;
+        }
+        public DataTable getIncomingMailHead()
+        {
+
+            DataTable dt = new DataTable();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT IncomingMail.ID, IncomingMail.Theme, IncomingMail.RegNumber, IncomingMail.Date, IncomingMail.Sender, " +
+                "UserInfo.Surname + ' ' + LEFT(UserInfo.FirstName, 1) + '.' + LEFT(UserInfo.Patronymic, 1) as Author " +
+                "FROM IncomingMail INNER JOIN " +
+                "UserInfo ON IncomingMail.DocumentAuthor = UserInfo.ID ";
+
+            connection.Open();
+            SqlDataAdapter sqladd = new SqlDataAdapter(cmd);
+            sqladd.Fill(dt);
+            connection.Close();
+
+            
+            return dt;
+        }
+        public DataTable getTreatmentMailHead()
+        {
+
+            DataTable dt = new DataTable();
+
+            
+
+
+            return dt;
+        }
+
+
 
 
         public string getPersonNameByID(int id)

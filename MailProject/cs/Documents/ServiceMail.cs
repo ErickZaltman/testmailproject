@@ -102,6 +102,22 @@ namespace MailProject
                 departmentID = value;
             }
         }
+
+        public ServiceMail(System.Data.DataRow dataRow)
+        {
+            this.ID = (int)dataRow["ID"];
+            this.AuthorID = (int)dataRow["AuthorID"];
+            this.Date = (DateTime)dataRow["Date"];
+            this.ExecutionDate = (DateTime)dataRow["ExecutionDate"];
+            this.Theme = (string)dataRow["Theme"];
+            this.RegNumber = (string)dataRow["RegNumber"];
+            this.Destination = (int)dataRow["Destination"];
+            this.Resolution = (string)dataRow["Resolution"];
+            this.State = (int)dataRow["State"];
+            this.DepartmentID = (int)dataRow["DepartmentID"];
+        }
+
+       
     }
 
 }

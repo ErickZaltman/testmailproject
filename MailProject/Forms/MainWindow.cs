@@ -8,6 +8,7 @@ namespace MailProject
 {
     public partial class MainWindow : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private Type currentType;
         List<Person> usersCollection;
         private Person currentUser;
         ConnectionToServer serverConnection;
@@ -96,58 +97,80 @@ namespace MailProject
             tbLogInfo.Text = "";
         }
 
-        private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            tbLogInfo.Text = currentUser.ToString();
-        }
+        
 
-        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            List<InnerMail> dt = serverConnection.getInnerIncomingMailHead(currentUser);
-            //InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
-            clearLog();
-            foreach(InnerMail mail in dt)
-            {
-                tbLogInfo.Text +=mail.ToString() +  ";\r\n";
-            }
-            //tbLogInfo.Text = test.ToString();
-        }
 
-        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+
+        private void fillDGVInnerIncomingMail()
         {
-            List<InnerMail> dt = serverConnection.getInnerOutgoingMailHead(currentUser);
-            //InnerMail test = new InnerMail(serverConnection.getDocumentInfo(1, TableName.InnerMail.Value));
-            clearLog();
-            foreach (InnerMail mail in dt)
+            dgvMain.DataSource = serverConnection.getInnerIncomingMailHead(currentUser);
+            dgvMain.Columns["ID"].Visible = false;
+            dgvMain.Columns["IsRead"].Visible = false;
+            foreach(DataGridViewRow dgvRow in dgvMain.Rows)
             {
-                tbLogInfo.Text += mail.ToString() + ";\r\n";
+                if ((bool)dgvRow.Cells["IsRead"].Value == false)
+                {
+                    dgvRow.DefaultCellStyle.BackColor = System.Drawing.Color.LightSteelBlue;
+                }
             }
         }
-
-        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void fillDGVInnerOutgoingMail()
         {
-            clearLog();
-            List<IncomingMail> tmpList = serverConnection.getIncomingMailHead();
-            foreach(IncomingMail mail in tmpList)
-            {
-               tbLogInfo.Text+= mail.ToString();
-            }
+            dgvMain.DataSource = serverConnection.getInnerOutgoingMailHead(currentUser);
+            dgvMain.Columns["ID"].Visible = false;
+            dgvMain.Columns["IsRead"].Visible = false;
+        }
+        private void fillDGVIncomingMail()
+        {
+            dgvMain.DataSource = serverConnection.getIncomingMailHead();
+            dgvMain.Columns["ID"].Visible = false;
+
+        }
+        private void fillDGVOutgoingMail()
+        {
+            dgvMain.DataSource = serverConnection.getOutgoingMailHead();
+            dgvMain.Columns["ID"].Visible = false;
+        }
+        private void fillDGVServiceMail()
+        {
+            dgvMain.DataSource = serverConnection.getServiceMailHead();
+            dgvMain.Columns["ID"].Visible = false;
         }
 
-        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+
+
+
+        private void navBarItemInnerIncoming_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            UserControl1 tmpUIc = new UserControl1();
-            tmpUIc.Author = serverConnection.getPersonNameByID(1);
-            tmpUIc.Location = new System.Drawing.Point(200, 200);
-            tmpUIc.Click += new EventHandler(test);
+            currentType = typeof(InnerMail);
+            fillDGVInnerIncomingMail();
+            
 
-
-            this.Controls.Add(tmpUIc);
+        }
+        private void navBarItemInnerOutgoing_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            currentType = typeof(InnerMail);
+            fillDGVInnerOutgoingMail();
+        }
+        private void navBarItemOuterIncomingMail_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            currentType = typeof(IncomingMail);
+            fillDGVIncomingMail();
         }
 
-        private  void test(object sender,EventArgs e)
+        private void navBarItemOuterOutgoingMail_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            MessageBox.Show("LEL");
+            fillDGVOutgoingMail();
+        }
+
+        private void dgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(currentType.ToString());
+        }
+
+        private void navBarItemServiceMail_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+        {
+            fillDGVServiceMail();
         }
     }
 }

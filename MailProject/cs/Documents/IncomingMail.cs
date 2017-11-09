@@ -138,7 +138,7 @@ namespace MailProject
             this.type = Type;
             this.departmentID = departmentID;
             this.sender = sender;
-            this.executionTime = executionTime;
+            this.executionTime = ExecutionTime;
             this.etc = etc;
             this.note = note;
             this.anwser = anwser;
@@ -168,21 +168,8 @@ namespace MailProject
 
         }
 
-        public IncomingMail(DataRow dataRow, bool head)
-        {
-            ID = (int)dataRow["ID"];
-            AuthorID = (int)dataRow["DocumentAuthor"];
-            Theme = (string)dataRow["Theme"];
-            Date = (DateTime)dataRow["Date"];
-            Sender = (string)dataRow["Sender"];
+        
 
-
-        }
-
-        public override string ToString()
-        {
-            return ID + ";" + AuthorID + ";" + Theme + ";" + Date + ";" + DepartmentID;
-        }
     }
 
 }

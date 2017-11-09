@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace MailProject
 {
@@ -149,7 +145,7 @@ namespace MailProject
             this.etc = etc;
 
         }
-        public OutgoingMail(DataRow dataRow)
+        public OutgoingMail(System.Data.DataRow dataRow)
         {
             this.ID = (int)dataRow["ID"];
             this.AuthorID = (int)dataRow["AuthorID"];
@@ -165,6 +161,8 @@ namespace MailProject
             this.performer = (int)dataRow["Perfomer"];
             this.etc = (string)dataRow["etc"];
         }
+
+        
 
 
     }

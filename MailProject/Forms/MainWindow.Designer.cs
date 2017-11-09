@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonLogin = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
@@ -38,7 +43,6 @@
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroupNewDocuments = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rbnTestGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.navBarControlMain = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGrInnerMail = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItemInnerIncoming = new DevExpress.XtraNavBar.NavBarItem();
@@ -52,8 +56,10 @@
             this.navBarItemOrders = new DevExpress.XtraNavBar.NavBarItem();
             this.tbLogInfo = new System.Windows.Forms.TextBox();
             this.btnClearLog = new System.Windows.Forms.Button();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbonControl1
@@ -69,7 +75,7 @@
             this.barButtonItem5,
             this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 12;
+            this.ribbonControl1.MaxItemId = 18;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -85,51 +91,38 @@
             // 
             // barButtonItem1
             // 
-            this.barButtonItem1.Caption = "СписокПользователей";
-            this.barButtonItem1.Id = 6;
+            this.barButtonItem1.Id = 12;
             this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonItem2
             // 
-            this.barButtonItem2.Caption = "Текущий Пользователь";
-            this.barButtonItem2.Id = 7;
+            this.barButtonItem2.Id = 13;
             this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
             // 
             // barButtonItem3
             // 
-            this.barButtonItem3.Caption = "Входящая почта";
-            this.barButtonItem3.Id = 8;
+            this.barButtonItem3.Id = 14;
             this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
             // 
             // barButtonItem4
             // 
-            this.barButtonItem4.Caption = "Исходящая почта";
-            this.barButtonItem4.Id = 9;
+            this.barButtonItem4.Id = 15;
             this.barButtonItem4.Name = "barButtonItem4";
-            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
             // 
             // barButtonItem5
             // 
-            this.barButtonItem5.Caption = "Исходящие письма";
-            this.barButtonItem5.Id = 10;
+            this.barButtonItem5.Id = 16;
             this.barButtonItem5.Name = "barButtonItem5";
-            this.barButtonItem5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem5_ItemClick);
             // 
             // barButtonItem6
             // 
-            this.barButtonItem6.Caption = "barButtonItem6";
-            this.barButtonItem6.Id = 11;
+            this.barButtonItem6.Id = 17;
             this.barButtonItem6.Name = "barButtonItem6";
-            this.barButtonItem6.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem6_ItemClick);
             // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroupNewDocuments,
-            this.rbnTestGroup});
+            this.ribbonPageGroupNewDocuments});
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "ribbonPage1";
             // 
@@ -138,17 +131,6 @@
             this.ribbonPageGroupNewDocuments.ItemLinks.Add(this.barButtonLogin);
             this.ribbonPageGroupNewDocuments.Name = "ribbonPageGroupNewDocuments";
             this.ribbonPageGroupNewDocuments.Text = "etc";
-            // 
-            // rbnTestGroup
-            // 
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem1);
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem2);
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem3);
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem4);
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem5);
-            this.rbnTestGroup.ItemLinks.Add(this.barButtonItem6);
-            this.rbnTestGroup.Name = "rbnTestGroup";
-            this.rbnTestGroup.Text = "Проверочная Группа";
             // 
             // navBarControlMain
             // 
@@ -185,11 +167,13 @@
             // 
             this.navBarItemInnerIncoming.Caption = "Входящие";
             this.navBarItemInnerIncoming.Name = "navBarItemInnerIncoming";
+            this.navBarItemInnerIncoming.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemInnerIncoming_LinkClicked);
             // 
             // navBarItemInnerOutgoing
             // 
             this.navBarItemInnerOutgoing.Caption = "Отправленные";
             this.navBarItemInnerOutgoing.Name = "navBarItemInnerOutgoing";
+            this.navBarItemInnerOutgoing.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemInnerOutgoing_LinkClicked);
             // 
             // navBarGrOutterMail
             // 
@@ -205,11 +189,13 @@
             // 
             this.navBarItemOuterIncomingMail.Caption = "Входящие письма";
             this.navBarItemOuterIncomingMail.Name = "navBarItemOuterIncomingMail";
+            this.navBarItemOuterIncomingMail.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemOuterIncomingMail_LinkClicked);
             // 
             // navBarItemOuterOutgoingMail
             // 
             this.navBarItemOuterOutgoingMail.Caption = "Исходящие письма";
             this.navBarItemOuterOutgoingMail.Name = "navBarItemOuterOutgoingMail";
+            this.navBarItemOuterOutgoingMail.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemOuterOutgoingMail_LinkClicked);
             // 
             // navBarItemTreatmentMail
             // 
@@ -230,6 +216,7 @@
             // 
             this.navBarItemServiceMail.Caption = "Служебные записки";
             this.navBarItemServiceMail.Name = "navBarItemServiceMail";
+            this.navBarItemServiceMail.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navBarItemServiceMail_LinkClicked);
             // 
             // navBarItemOrders
             // 
@@ -257,12 +244,68 @@
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
             // 
+            // dgvMain
+            // 
+            this.dgvMain.AllowUserToAddRows = false;
+            this.dgvMain.AllowUserToDeleteRows = false;
+            this.dgvMain.AllowUserToResizeColumns = false;
+            this.dgvMain.AllowUserToResizeRows = false;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvMain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvMain.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.dgvMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvMain.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMain.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvMain.Location = new System.Drawing.Point(212, 140);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.ReadOnly = true;
+            this.dgvMain.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvMain.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvMain.RowHeadersVisible = false;
+            this.dgvMain.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvMain.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMain.Size = new System.Drawing.Size(656, 314);
+            this.dgvMain.TabIndex = 9;
+            this.dgvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellDoubleClick);
+            // 
             // MainWindow
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 533);
+            this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.tbLogInfo);
             this.Controls.Add(this.navBarControlMain);
@@ -272,6 +315,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +346,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbnTestGroup;
+        private System.Windows.Forms.DataGridView dgvMain;
     }
 }
